@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { fetchData } from "../api/api";
+import styled from "styled-components";
 
 interface DataList {
   currency_code: string;
@@ -37,13 +38,21 @@ function Item() {
   return (
     <div>
       {Object.values(data.items).map((item, index) => (
-        <div key={index}>
+        <Wrapper key={index}>
           <div>{item.name}</div>
           <div>{item.price}</div>
-        </div>
+          <button>+</button>
+        </Wrapper>
       ))}
     </div>
   );
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  padding: 5% 5%;
+  border: 1px solid black;
+  justify-content: space-between;
+`;
 
 export default Item;
