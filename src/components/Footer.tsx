@@ -19,6 +19,16 @@ const FooterWrapper = styled.div`
   height: 5%;
   width: 100%;
   box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+
+  button {
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    border: 1px solid #9586e8;
+    background: #fff;
+    color: #9586e8;
+    cursor: pointer;
+  }
 `;
 
 export default Footer;

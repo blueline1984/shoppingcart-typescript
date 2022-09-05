@@ -3,10 +3,6 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ShoppingCart from "../components/ShoppingCart";
 
-type sideBarProps = {
-  sideBar: boolean;
-};
-
 function Navbar() {
   const [sideBar, setSideBar] = useState(false);
 
@@ -25,7 +21,6 @@ function Navbar() {
       <LinkWrapper>
         <Link to="/">Item</Link>
         <Link to="discount">Discount</Link>
-        <Link to="shoppingcart">Shopping Cart</Link>
         <button onClick={openSideBar}>Cart</button>
       </LinkWrapper>
       <ShoppingCart sideBar={sideBar} closeSideBar={closeSideBar} />
@@ -42,10 +37,27 @@ const LinkWrapper = styled.div`
   position: sticky;
   top: 0;
   background: #fff;
+  align-items: center;
 
   a {
     text-decoration: none;
     color: #9586e8;
+  }
+
+  button {
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    border: 1px solid #9586e8;
+    background: #fff;
+    color: #9586e8;
+    cursor: pointer;
+  }
+
+  button:hover {
+    border: 1px solid #9586e8;
+    background: #9586e8;
+    color: #fff;
   }
 `;
 

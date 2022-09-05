@@ -20,11 +20,23 @@ interface Items {
 }
 
 function Item() {
+  const [selectedItems, setSelectedItems] = useState([]);
   const [data, setData] = useState<DataList>({
     currency_code: "",
     discounts: { name: "", rate: 0 },
     items: { count: 0, name: "", price: 0 },
   });
+
+  const handleChange = (event: any) => {};
+
+  const CURRENCY_FORMATTER = new Intl.NumberFormat(undefined, {
+    currency: "KRW",
+    style: "currency",
+  });
+
+  function formatCurrency(number: number) {
+    return CURRENCY_FORMATTER.format(number);
+  }
 
   useEffect(() => {
     const getData = async () => {
@@ -39,9 +51,9 @@ function Item() {
     <div>
       {Object.values(data.items).map((item, index) => (
         <Wrapper key={index}>
-          <div>{item.name}</div>
-          <div>{item.price}</div>
-          <input type="checkbox" />
+          <div className="item-title">{item.name}</div>
+          <div className="item-price">{formatCurrency(item.price)}</div>
+          <input type="checkbox" onChange={handleChange} />
         </Wrapper>
       ))}
     </div>
@@ -51,9 +63,16 @@ function Item() {
 const Wrapper = styled.div`
   display: flex;
   margin: 3%;
-  padding: 5% 5%;
-  border: 1px solid black;
+  padding: 3% 5%;
+  border: 1px solid #9586e8;
+  border-radius: 10px;
   justify-content: space-between;
+  font-size: 1.25rem;
+
+  .item-title {
+    width: 20%;
+    white-space: no-wrap;
+  }
 `;
 
 export default Item;

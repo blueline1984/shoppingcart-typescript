@@ -1,7 +1,68 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { fetchData } from "../api/api";
+import styled from "styled-components";
+
+interface DataList {
+  currency_code: string;
+  discounts: Discount;
+  items: Items;
+}
+
+interface Discount {
+  name: string;
+  rate: number;
+}
+
+interface Items {
+  count: number;
+  name: string;
+  price: number;
+}
 
 function Discount() {
-  return <div>Discount</div>;
+  const [data, setData] = useState<DataList>({
+    currency_code: "",
+    discounts: { name: "", rate: 0 },
+    items: { count: 0, name: "", price: 0 },
+  });
+
+  const handleChange = (event: any) => {};
+
+  useEffect(() => {
+    const getData = async () => {
+      const newData = await fetchData();
+      setData(newData);
+    };
+
+    getData();
+  }, []);
+
+  return (
+    <div>
+      {Object.values(data.discounts).map((item, index) => (
+        <Wrapper key={index}>
+          <div>{item.name}</div>
+          <div>{Math.round(item.rate * 100)}%</div>
+          <input type="checkbox" onChange={handleChange} />
+        </Wrapper>
+      ))}
+    </div>
+  );
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  margin: 3%;
+  padding: 3% 5%;
+  border: 1px solid #9586e8;
+  border-radius: 10px;
+  justify-content: space-between;
+  font-size: 1.25rem;
+
+  .item-title {
+    width: 20%;
+    white-space: no-wrap;
+  }
+`;
 
 export default Discount;
