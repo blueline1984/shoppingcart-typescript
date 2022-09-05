@@ -3,6 +3,7 @@ import Item from "./pages/Item";
 import Discount from "./pages/Discount";
 import ShoppingCart from "./pages/ShoppingCart";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/discount" element={<Discount />} />
         <Route path="/shoppingcart" element={<ShoppingCart />} />
       </Routes>
+      <Footer />
     </>
   );
 }

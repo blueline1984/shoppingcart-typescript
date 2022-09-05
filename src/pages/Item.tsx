@@ -41,7 +41,7 @@ function Item() {
         <Wrapper key={index}>
           <div>{item.name}</div>
           <div>{item.price}</div>
-          <button>+</button>
+          <input type="checkbox" />
         </Wrapper>
       ))}
     </div>
@@ -50,6 +50,7 @@ function Item() {
 
 const Wrapper = styled.div`
   display: flex;
+  margin: 3%;
   padding: 5% 5%;
   border: 1px solid black;
   justify-content: space-between;
