@@ -27,7 +27,11 @@ function Item() {
     items: { count: 0, name: "", price: 0 },
   });
 
-  const handleChange = (event: any) => {};
+  console.log("selectedItems", selectedItems);
+
+  const handleChange = (event: any) => {
+    setSelectedItems(event.target.value);
+  };
 
   const CURRENCY_FORMATTER = new Intl.NumberFormat(undefined, {
     currency: "KRW",
@@ -68,6 +72,7 @@ const Wrapper = styled.div`
   border-radius: 10px;
   justify-content: space-between;
   font-size: 1.25rem;
+  color: #808080;
 
   .item-title {
     width: 20%;

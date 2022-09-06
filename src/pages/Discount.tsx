@@ -58,6 +58,7 @@ const Wrapper = styled.div`
   border-radius: 10px;
   justify-content: space-between;
   font-size: 1.25rem;
+  color: #808080;
 
   .item-title {
     width: 20%;
