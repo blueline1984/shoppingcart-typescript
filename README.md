@@ -22,9 +22,20 @@ npm start
 ```
 
 - 환경변수 설정
-
+  - root 폴더에 `.env` 파일을 만들고 환경변수를 추가하세요
 ```
 REACT_APP_API_URL=YOUR REACT APP API URL
+```
+
+### 폴더구조
+```
+└── src
+    ├── api
+    ├── components
+    ├── models
+    ├── pages
+    ├── App.tsx
+    └── index.tsx
 ```
 
 ### 전체적인 소감
