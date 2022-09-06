@@ -20,6 +20,7 @@ interface Items {
 }
 
 function Item() {
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedItems, setSelectedItems] = useState([]);
   const [data, setData] = useState<DataList>({
     currency_code: "",
@@ -27,10 +28,10 @@ function Item() {
     items: { count: 0, name: "", price: 0 },
   });
 
-  console.log("selectedItems", selectedItems);
-
-  const handleChange = (event: any) => {
-    setSelectedItems(event.target.value);
+  const handleChange = (event: any, checked: boolean, id: never) => {
+    if (checked) {
+      setSelectedItems([...selectedItems, id]);
+    }
   };
 
   const CURRENCY_FORMATTER = new Intl.NumberFormat(undefined, {
@@ -43,11 +44,12 @@ function Item() {
   }
 
   useEffect(() => {
+    setIsLoading(true);
     const getData = async () => {
       const newData = await fetchData();
       setData(newData);
+      setIsLoading(false);
     };
-
     getData();
   }, []);
 
@@ -55,9 +57,15 @@ function Item() {
     <div>
       {Object.values(data.items).map((item, index) => (
         <Wrapper key={index}>
-          <div className="item-title">{item.name}</div>
-          <div className="item-price">{formatCurrency(item.price)}</div>
-          <input type="checkbox" onChange={handleChange} />
+          {!isLoading ? (
+            <>
+              <div className="item-title">{item.name}</div>
+              <div className="item-price">{formatCurrency(item.price)}</div>
+              <input type="checkbox" id={item} />
+            </>
+          ) : (
+            <div>Loading...</div>
+          )}
         </Wrapper>
       ))}
     </div>

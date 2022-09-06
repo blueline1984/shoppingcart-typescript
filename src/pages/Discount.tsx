@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { fetchData } from "../api/api";
 import styled from "styled-components";
 
@@ -20,20 +20,20 @@ interface Items {
 }
 
 function Discount() {
+  const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<DataList>({
     currency_code: "",
     discounts: { name: "", rate: 0 },
     items: { count: 0, name: "", price: 0 },
   });
 
-  const handleChange = (event: any) => {};
-
   useEffect(() => {
+    setIsLoading(true);
     const getData = async () => {
       const newData = await fetchData();
       setData(newData);
+      setIsLoading(false);
     };
-
     getData();
   }, []);
 
@@ -41,9 +41,15 @@ function Discount() {
     <div>
       {Object.values(data.discounts).map((item, index) => (
         <Wrapper key={index}>
-          <div>{item.name}</div>
-          <div>{Math.round(item.rate * 100)}%</div>
-          <input type="checkbox" onChange={handleChange} />
+          {!isLoading ? (
+            <>
+              <div>{item.name}</div>
+              <div>{Math.round(item.rate * 100)}%</div>
+              <input type="checkbox" />
+            </>
+          ) : (
+            <div>Loading...</div>
+          )}
         </Wrapper>
       ))}
     </div>
